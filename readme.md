@@ -1,36 +1,29 @@
-CRUD
-CREATE
-READ
-UPDATE
-DELETE
+Desarrollo Full Stack Node JS - Grupo 9 - Trabajo practico Backend
+-CRUD
+    CREATE
+    READ
+    UPDATE
+    DELETE
 
-REQUEST RESPONSE
-CLIENTE  SERVIDOR
+-REQUEST RESPONSE
+-CLIENTE  SERVIDOR
 
-MVC
-MODELO VISTA CONTROLADOR
+-MVC - MODELO VISTA CONTROLADOR
 
-inicializar un proyecto con node
-
+Inicializar un proyecto con node
 npm init (crear el package.json) npm init -y
-
 * NPM (Node Package Manager)
-
 npm install nombreModulo - dependecia
-
 npm i = traemos ls dependencias en los modulos de node
-
 modulos
 https://www.npmjs.com/
 
 nodemon index.js
-
-
+npm -init
 --
 CORS
 CORS: qué es y cómo funciona el cross-origin resource sharing
 Cuando se abre una página web, cargar datos de servidores ajenos está, en teoría, estrictamente prohibido. Sin embargo, puede haber excepciones: si los administradores de ambas webs han acordado trabajar juntos, no hay por qué evitar el intercambio. En estos casos, el llamado cross-origin resource sharing (CORS) regula la colaboración. Te explicamos cómo funciona.
-
 https://developer.mozilla.org/es/docs/Web/HTTP/CORS
 
 mysql2

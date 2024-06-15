@@ -1,20 +1,17 @@
-{
-  "name": "web3b",
+{"name": "tpo_nodejs_bb",
   "version": "1.0.0",
-  "description": "web3b - backend",
+  "description": "Desarrollo Full Stack Node JS - Grupo 9 - Trabajo practico Backend",
   "main": "index.js",
-  "type": "commonjs",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-	"cors": "^2.8.5",
-	"express": "^4.19.2",
-	"mysql2": "^3.10.0",
-	"sequelize": "^6.37.3"
+    "scripts": {
+               "test": "echo \"Error: no test specified\" && exit 1",
+               "dev": "nodemon index.js"
+               },
+  "author": "Grupo 9",
+  "license": "ISC",
+  "dependencies": {
+                  "cors": "^2.8.5",
+                  "express": "^4.19.2",
+                  "mysql2": "^3.10.1",
+                  "sequelize": "^6.37.3"
   }
 }
-

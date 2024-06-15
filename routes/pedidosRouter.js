@@ -1,10 +1,10 @@
 const express = require ("express")
 const router = express.Router()
 
-const {traerUnPosteo,traerPosteos} = require("../controllers/posteosControllers.js")
+const {traerUnPedido,traerPedidos} = require("../controllers/pedidosControllers.js")
 
-router.get ("/",traerPosteos) // 
-router.get ("/:id",traerUnPosteo) // 
+router.get ("/",traerPedidos) // 
+router.get ("/:id",traerUnPedido) // 
 
 /* router.post ("/",(req,res)=>{
     res.send("tomo lo que viaja en el req.body y lo guardo en la BD")
