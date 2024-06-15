@@ -10,6 +10,7 @@ const sPort      = 3306
 const db = new Sequelize (sBaseDatos,sUsuario,sContraseña,{
 host : sServer,
 dialect:"mysql",
+dialectModule: require('mysql2'),
 port:sPort
 })
 module.exports = db
