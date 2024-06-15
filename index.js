@@ -8,9 +8,9 @@ const db = require ("./data/db.js")
 app.use(cors())
 app.use (express.json()) // analizamos y lo ponemos en formato req.body
 
-    /*    pedido http/ruta - funcion = controler */
+/*    pedido http/ruta - funcion = controler */
 app.get ("/",(req,res)=>{
-    res.send("estas en el home")
+    res.send("Estás en el Home")
 }) // sin modularizar
 
 app.use ("/pedidos",pedidosRouter)
@@ -26,5 +26,5 @@ const conexiondb = async ()=>{
 }
 app.listen(port,()=>{
     conexiondb()
-    console.log(`Server ok en el puerto ${port}`);
+    console.log(`Server OK en el puerto ${port}`);
 })
