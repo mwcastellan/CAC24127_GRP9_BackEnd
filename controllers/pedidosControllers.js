@@ -1,12 +1,17 @@
-const pjson = require('../package.json');
+const db = require("../data/db.js");
+const pjson = require("../package.json");
 const msg_cabecera = `Sistema: ${pjson.name}`;
 
-const traerPedidos = (req,res) =>{
-    res.send (`${msg_cabecera} - Busco los pedidos de la BD y los envio en .JSON`)
-    }
-    
-const traerUnPedido = (req,res) =>{
-    res.send (`${msg_cabecera} - Busco el posteo de la BD y lo envio en .JSON`)
-    }
-    
-module.exports = {traerPedidos,traerUnPedido}
+const traerPedidos = (req, res) => {
+  const sql = "Select * from mcastellan_grp9.pedidos order by id asc";
+  db.query(sql, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+};
+
+const traerUnPedido = (req, res) => {
+  res.send(`${msg_cabecera} - Busco el posteo de la BD y lo envio en .JSON`);
+};
+
+module.exports = {traerPedidos, traerUnPedido};

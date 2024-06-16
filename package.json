@@ -1,6 +1,6 @@
 {
-  "name": "tpo_nodejs_bb",
-  "version": "1.0.0",
+  "name": "tpo_nodejs_bb_V01R00M01",
+  "version": "1.0.1",
   "description": "Desarrollo Full Stack Node JS - Grupo 9 - Trabajo practico Backend",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "author": "Grupo 9",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "mysql2": "^3.10.1"
   }
 }

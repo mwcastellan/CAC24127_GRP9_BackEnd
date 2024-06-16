@@ -3,9 +3,11 @@ const router = express.Router()
 
 const {traerPedidos,traerUnPedido} = require("../controllers/pedidosControllers.js")
 
+// Segun Pedidos es Todos o Individual
 router.get ("/",traerPedidos) // 
 router.get ("/:id",traerUnPedido) // 
 
+// Continua despues con otras opciones
 /* router.post ("/",(req,res)=>{
     res.send("tomo lo que viaja en el req.body y lo guardo en la BD")
 }) // 
