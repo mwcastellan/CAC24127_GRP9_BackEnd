@@ -1,13 +1,11 @@
 const express = require ("express")
 const app = express()
 const port = 3030
-const cors = require("cors")
 const pedidosRouter = require("./routes/pedidosRouter.js")
 const db = require ("./data/db.js")
 const pjson = require('./package.json');
 const msg_cabecera = `Sistema: ${pjson.name}`
 
-app.use(cors())
 app.use (express.json()) 
 
 /*    pedido http/ruta - funcion = controler */
