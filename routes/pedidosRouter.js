@@ -1,7 +1,7 @@
 const express = require ("express")
 const router = express.Router()
 
-const {traerUnPedido,traerPedidos} = require("../controllers/pedidosControllers.js")
+const {traerPedidos,traerUnPedido} = require("../controllers/pedidosControllers.js")
 
 router.get ("/",traerPedidos) // 
 router.get ("/:id",traerUnPedido) // 
