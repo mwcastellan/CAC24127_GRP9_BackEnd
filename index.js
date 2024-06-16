@@ -18,16 +18,16 @@ app.get ("/",(req,res)=>{
 app.use ("/pedidos",pedidosRouter)
 
 // conexion a la base de datos
-const conexiondb = async ()=>{
-    try {
-       await db.authenticate()
-       console.log(`${msg_cabecera} - Conexion ok a la base de datos`);
-    } catch (error) {
-       console.log(`${msg_cabecera} - El error es : ${error}`)
-    }
-   }
+//const conexiondb = async ()=>{
+//    try {
+//       await db.authenticate()
+//       console.log(`${msg_cabecera} - Conexion ok a la base de datos`);
+//    } catch (error) {
+//       console.log(`${msg_cabecera} - El error es : ${error}`)
+//    }
+//   }
 
    app.listen(port,()=>{
-       conexiondb()
+ //      conexiondb()
        console.log(`${msg_cabecera} - Server OK en el puerto ${port}`);
    })
