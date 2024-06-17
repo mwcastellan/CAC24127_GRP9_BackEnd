@@ -18,7 +18,10 @@ app.use("/pedidos", pedidosRouter);
 // Ingreso a Productos
 app.use("/productos", productosRouter);
 
+// Conectar a la base Test
+db.con
 // Conectando a Puerto
 app.listen(port,()=>{
+  
   console.log(`Server ok en el puerto ${port}`);
 })
