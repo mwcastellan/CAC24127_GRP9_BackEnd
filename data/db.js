@@ -9,7 +9,7 @@ const connection_def = {
 
 const mysql = require("mysql2");
 const connection = mysql.createConnection(connection_def);
-console.log(`${msg_cabecera} - Base de Datos< :  ${connection_def.host} - ${connection_def.database}`);
+
 connection.connect((err) => {
   if (err) {
     console.error(
@@ -18,6 +18,6 @@ connection.connect((err) => {
     );
     return;
   }
-  console.log(`${msg_cabecera} - Base de Datos> :  ${connection_def.host} - ${connection_def.database}`);
+  console.log(`${msg_cabecera} - Base de Datos :  ${connection_def.host} - ${connection_def.database}`);
 });
 module.exports = connection;
