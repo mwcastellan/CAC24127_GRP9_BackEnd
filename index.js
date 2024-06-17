@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3030;
 const pedidosRouter = require("./routes/pedidosRouter.js");
+const productosRouter = require("./routes/productosRouter.js");
 const db = require("./data/db.js");
 const pjson = require("./package.json");
 const msg_cabecera = `Sistema: ${pjson.name}`;
@@ -14,6 +15,9 @@ app.get("/", (req, res) => {
 });
 // Ingreso a Pedidos
 app.use("/pedidos", pedidosRouter);
+// Ingreso a Productos
+app.use("/productos", productosRouter);
+
 // Conectando a Puerto
 app.listen(port,()=>{
   console.log(`Server ok en el puerto ${port}`);
