@@ -5,7 +5,7 @@ const pedidosRouter = require("./routes/pedidosRouter.js");
 const productosRouter = require("./routes/productosRouter.js");
 const db = require("./data/db.js");
 const pjson = require("./package.json");
-const msg_cabecera = `Sistema: ${pjson.name}`;
+const msg_cabecera = `SistemA: ${pjson.name}`;
 
 app.use(express.json());
 
