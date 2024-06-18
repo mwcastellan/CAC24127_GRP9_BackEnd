@@ -1,6 +1,5 @@
 const express = require ("express")
 const router = express.Router()
-
 const {traerPedidos,traerUnPedido} = require("../controllers/pedidosControllers.js")
 
 // Segun Pedidos es Todos o Individual

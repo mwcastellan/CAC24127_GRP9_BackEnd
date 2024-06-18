@@ -1,11 +1,10 @@
 const express = require ("express")
 const router = express.Router()
-
 const {traerProductos,traerUnProducto} = require("../controllers/productosControllers.js")
 
 // Segun Pedidos es Todos o Individual
-router.get ("/",traerProductos) // 
-router.get ("/:id",traerUnProducto) // 
+router.get ("/",traerProductos) 
+router.get ("/:id",traerUnProducto) 
 
 // Continua despues con otras opciones
 /* router.post ("/",(req,res)=>{

@@ -4,6 +4,7 @@ const cors = require("cors")
 const port = 3030;
 const pedidosRouter = require("./routes/pedidosRouter.js");
 const productosRouter = require("./routes/productosRouter.js");
+const reporte_01Router = require("./routes/reporte_01Router.js");
 const pjson = require("./package.json");
 const msg_cabecera = `Sistema: ${pjson.name}`;
 
@@ -18,6 +19,9 @@ app.get("/", (req, res) => {
 app.use("/pedidos", pedidosRouter);
 // Ingreso a Productos
 app.use("/productos", productosRouter);
+// Ingreso a Productos Ordenados
+app.use("/reporte_01", reporte_01Router);
+
 
 // Conectando a Puerto
 app.listen(port,()=>{

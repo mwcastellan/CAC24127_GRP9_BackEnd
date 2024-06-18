@@ -17,4 +17,5 @@ const traerUnProducto = (req, res) => {
   res.send(`${msg_cabecera} - Busco el producto de la BD y lo envio en .JSON`);
 };
 
+
 module.exports = {traerProductos, traerUnProducto};
