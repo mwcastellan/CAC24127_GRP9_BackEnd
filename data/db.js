@@ -7,6 +7,7 @@ const connection_def = {
   database: "mcastellan_grp9",
 };
 
+console.log(`${msg_cabecera} - A conectar a la Base de Datos :  ${connection_def.host} - ${connection_def.database}`);
 const mysql = require("mysql2");
 const connection = mysql.createConnection(connection_def);
 
@@ -20,4 +21,5 @@ connection.connect((err) => {
   }
   console.log(`${msg_cabecera} - Base de Datos :  ${connection_def.host} - ${connection_def.database}`);
 });
+
 module.exports = connection;
