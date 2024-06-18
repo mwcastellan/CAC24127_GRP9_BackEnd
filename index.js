@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
+const cors = require("cors")
 const port = 3030;
 const pedidosRouter = require("./routes/pedidosRouter.js");
 const productosRouter = require("./routes/productosRouter.js");
 const pjson = require("./package.json");
 const msg_cabecera = `Sistema: ${pjson.name}`;
 
+app.use(cors());
 app.use(express.json());
 
 // Ingreso a la raiz solamente
