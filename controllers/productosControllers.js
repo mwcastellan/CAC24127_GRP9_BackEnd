@@ -4,6 +4,7 @@ const msg_cabecera = `Sistema: ${pjson.name}`;
 
 // Trae los Productos
 const traerProductos = (req, res) => {
+  db.connection;
   const sql = "Select * from mcastellan_grp9.Vw_Productos order by id asc";
   db.query(sql, (err, results) => {
     if (err) throw err;
