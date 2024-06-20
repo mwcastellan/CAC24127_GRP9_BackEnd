@@ -16,4 +16,13 @@ const db = new Sequelize(
   }
 );
 
+// mysql2
+const wmysql = require("mysql2");
+const wmysql_conn = wmysql.createConnection({
+  host: connection_host,
+  user: connection_user,
+  password: connection_password,
+  database: connection_database,
+});
+
 module.exports = db;
