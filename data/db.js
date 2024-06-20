@@ -1,29 +1,19 @@
-const pjson = require("../package.json");
-const msg_cabecera = `Sistema: ${pjson.name}`;
-const connection_def = {
-  host: "mysql-mcastellan.alwaysdata.net",
-  user: "363082_grp9",
-  password: "CaC24127GRP9",
-  database: "mcastellan_grp9",
-};
+const connection_host = "mysql-mcastellan.alwaysdata.net";
+const connection_user = "363082_grp9";
+const connection_password = "CaC24127GRP9";
+const connection_database = "mcastellan_grp9";
+const connection_dialect = "mysql";
 
-const mysql = require("mysql2");
-const connection = mysql.createConnection(connection_def);
-connection.connect((err) => {
-  if (err) {
-    console.error(
-      `${msg_cabecera} - Error al conectar a la base de datos: `,
-      err
-    );
-    return;
-  } else {
-    console.log(
-      `${msg_cabecera} - Conectado a la Base de Datos :  ${connection_def.host} - ${connection_def.database}`
-    );
+const { Sequelize } = require("sequelize");
+
+const db = new Sequelize(
+  connection_database,
+  connection_user,
+  connection_password,
+  {
+    host: connection_host,
+    dialect: connection_dialect,
   }
-  console.log(
-    `${msg_cabecera} - Base de Datos :  ${connection_def.host} - ${connection_def.database}`
-  );
-});
+);
 
-module.exports = connection;
+module.exports = db;

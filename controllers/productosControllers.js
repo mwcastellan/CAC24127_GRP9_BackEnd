@@ -1,20 +1,24 @@
-const db = require("../data/db.js");
-const pjson = require("../package.json");
-const msg_cabecera = `Sistema: ${pjson.name}`;
+const productosModel = require("../models/productosModel.js");
 
 // Trae los Productos
-const traerProductos = (req, res) => {
-  db.connection;
-  const sql = "Select * from mcastellan_grp9.Vw_Productos order by id asc";
-  db.query(sql, (err, results) => {
-    if (err) throw err;
-    res.json(results);
-  });
+const traerProductos = async (req, res) => {
+  try {
+    const productos = await productosModel.findAll({
+      order: [["ID", "ASC"]],
+    });
+    res.json(productos);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
 };
 
-// Traer un Producto en particular
-const traerUnProducto = (req, res) => {
-  res.send(`${msg_cabecera} - Busco el producto de la BD y lo envio en .JSON`);
+// Trae un Producto en particular
+const traerUnProducto = async (req, res) => {
+  try {
+    const producto = await productosModel.findByPk(req.params.id);
+    res.json(producto);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
 };
-
-module.exports = {traerProductos, traerUnProducto};
+module.exports = { traerProductos, traerUnProducto };

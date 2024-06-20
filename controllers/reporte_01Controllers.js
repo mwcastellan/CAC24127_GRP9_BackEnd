@@ -1,15 +1,19 @@
-const db = require("../data/db.js");
-const pjson = require("../package.json");
-const msg_cabecera = `Sistema: ${pjson.name}`;
+const reporte_01Model = require("../models/reporte_01Model.js");
 
 // Trae los Productos Ordenados -> by idcategoria asc, idsubcategoria asc, id asc
-const traerReporte_01 = (req, res) => {
-  db.connection;
-  const sql = "Select * from mcastellan_grp9.Vw_Productos order by idcategoria asc, idsubcategoria asc, id asc";
-  db.query(sql, (err, results) => {
-    if (err) throw err;
-    res.json(results);
-  });
+const traerReporte_01 = async (req, res) => {
+  try {
+    const productos = await reporte_01Model.findAll({
+      order: [
+        ["idcategoria", "ASC"],
+        ["idsubcategoria", "ASC"],
+        ["ID", "ASC"],
+      ],
+    });
+    res.json(productos);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
 };
 
-module.exports = {traerReporte_01};
+module.exports = { traerReporte_01 };

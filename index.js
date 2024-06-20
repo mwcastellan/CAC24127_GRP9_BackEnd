@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
-const cors = require("cors")
 const port = 3030;
+const cors = require("cors");
 const pedidosRouter = require("./routes/pedidosRouter.js");
 const productosRouter = require("./routes/productosRouter.js");
 const reporte_01Router = require("./routes/reporte_01Router.js");
 const pjson = require("./package.json");
 const msg_cabecera = `Sistema: ${pjson.name}`;
+const db = require("./data/db.js");
 
 app.use(cors());
 app.use(express.json());
@@ -22,8 +23,17 @@ app.use("/productos", productosRouter);
 // Ingreso a Productos Ordenados
 app.use("/reporte_01", reporte_01Router);
 
+// Conexion a la Base de Datos
+const conexiondb = async () => {
+  try {
+    await db.authenticate();
+    console.log(`Conexion OK a la Base de Datos`);
+  } catch (error) {
+    console.log(`El Error es : ${error}`);
+  }
+};
 
-// Conectando a Puerto
-app.listen(port,()=>{
-  console.log(`Server ok en el puerto ${port}`);
-})
+app.listen(port, () => {
+  conexiondb();
+  console.log(`Server OK en el Puerto ${port}`);
+});
