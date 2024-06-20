@@ -9,10 +9,9 @@ const {
 router.get("/", traerPedidos);
 router.get("/:id", traerUnPedido);
 
-//router.get ("/",traerPosteos)
-//router.get ("/:id",traerUnPosteo)
-//router.post ("/",crearPosteo)
-//router.put ("/:id",actualizarPosteo)
-//router.delete ("/:id",borrarPosteo)
+// Faltan estos:
+//router.post ("/",crearPedido)
+//router.put ("/:id",actualizarPedido)
+//router.delete ("/:id",borrarPedido)
 
 module.exports = router;

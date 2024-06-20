@@ -16,7 +16,9 @@ const db = new Sequelize(
   }
 );
 
-// mysql2
+// mysql2 - Defino solamente, no tiene uso, porque VERCEL no instala el paquete de mysql2 
+// si no se hace referencia a él. Se usa Sequelize.
+// Dá mensaje de error que se instale mysql2 manualmente.
 const wmysql = require("mysql2");
 const wmysql_conn = wmysql.createConnection({
   host: connection_host,
@@ -24,5 +26,6 @@ const wmysql_conn = wmysql.createConnection({
   password: connection_password,
   database: connection_database,
 });
+// 
 
 module.exports = db;
