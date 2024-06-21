@@ -22,5 +22,14 @@ const traerUnPedido = async (req, res) => {
   }
 };
 
+// Crear un Pedido - Post
+const crearUnPedido = async (req, res) => {
+  try {
+    await pedidosModel.create(req.body);
+    res.json({ message: "Registro creado correctamente" });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
 
-module.exports = { traerPedidos, traerUnPedido };
+module.exports = { traerPedidos, traerUnPedido, crearUnPedido };
