@@ -8,7 +8,7 @@ const traerPedidos = async (req, res) => {
     });
     res.json(pedidos);
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: `Error Traer todos :${error.message}` });
   }
 };
 
@@ -18,7 +18,7 @@ const traerUnPedido = async (req, res) => {
     const pedido = await pedidosModel.findByPk(req.params.id);
     res.json(pedido);
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: `Error Traer :${error.message}` });
   }
 };
 
@@ -26,9 +26,9 @@ const traerUnPedido = async (req, res) => {
 const crearUnPedido = async (req, res) => {
   try {
     await pedidosModel.create(req.body);
-    res.json({ message: "Registro creado correctamente" });
+    res.json({ message: "Pedido creado correctamente" });
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: `Error Crear :${error.message}` });
   }
 };
 
