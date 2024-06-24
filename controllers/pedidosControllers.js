@@ -8,9 +8,7 @@ const traerPedidos = async (req, res) => {
     });
     res.json(pedidos);
   } catch (error) {
-    return res
-      .status(400)
-      .json({ message: `Error Traer todos :${error.message}` });
+    res.json({ message: error.message });
   }
 };
 
@@ -20,7 +18,7 @@ const traerUnPedido = async (req, res) => {
     const pedido = await pedidosModel.findByPk(req.params.id);
     res.json(pedido);
   } catch (error) {
-    return res.status(400).json({ message: `Error Traer :${error.message}` });
+    res.json({ message: error.message });
   }
 };
 
@@ -30,7 +28,7 @@ const crearUnPedido = async (req, res) => {
     await pedidosModel.create(req.body);
     res.json({ message: "Pedido creado correctamente" });
   } catch (error) {
-    return res.status(400).json({ message: `Error Traer :${error.message}` });
+    res.json({ message: error.message });
   }
 };
 

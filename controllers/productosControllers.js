@@ -8,7 +8,7 @@ const traerProductos = async (req, res) => {
     });
     res.json(productos);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    res.json({ message: error.message });
   }
 };
 
@@ -18,7 +18,7 @@ const traerUnProducto = async (req, res) => {
     const producto = await productosModel.findByPk(req.params.id);
     res.json(producto);
   } catch (error) {
-    return res.status(400).json({ message: error.message });
+    res.json({ message: error.message });
   }
 };
 module.exports = { traerProductos, traerUnProducto };
