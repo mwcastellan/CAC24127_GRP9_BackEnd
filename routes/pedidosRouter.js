@@ -9,7 +9,7 @@ const {
 // Segun Pedidos es Todos o Individual
 router.get("/", traerPedidos);
 router.get("/:id", traerUnPedido);
-router.post("/",crearUnPedido);
+router.post("/", crearUnPedido);
 
 // Faltan estos:
 //router.put ("/:id",actualizarPedido) -- (IDPRODUCTO,	CANTIDAD,	PRECIO,	IMPORTE)
