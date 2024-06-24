@@ -8,7 +8,9 @@ const traerPedidos = async (req, res) => {
     });
     res.json(pedidos);
   } catch (error) {
-    return res.status(400).json({ message: `Error Traer todos :${error.message}` });
+    return res
+      .status(400)
+      .json({ message: `Error Traer todos :${error.message}` });
   }
 };
 
@@ -28,7 +30,7 @@ const crearUnPedido = async (req, res) => {
     await pedidosModel.create(req.body);
     res.json({ message: "Pedido creado correctamente" });
   } catch (error) {
-    return res.status(400).json({ message: `Error Crear :${error.message}` });
+    return res.status(400).json({ message: `Error Traer :${error.message}` });
   }
 };
 
