@@ -4,15 +4,15 @@ const {
   traerPedidos,
   traerUnPedido,
   crearUnPedido,
+  actualizarUnPedido,
+  borrarUnPedido,
 } = require("../controllers/pedidosControllers.js");
 
 // Segun Pedidos es Todos o Individual
 router.get("/", traerPedidos);
 router.get("/:id", traerUnPedido);
 router.post("/", crearUnPedido);
-
-// Faltan estos:
-//router.put ("/:id",actualizarPedido) -- (IDPRODUCTO,	CANTIDAD,	PRECIO,	IMPORTE)
-//router.delete ("/:id",borrarPedido)
+router.put("/:id", actualizarUnPedido);
+router.delete("/:id", borrarUnPedido);
 
 module.exports = router;

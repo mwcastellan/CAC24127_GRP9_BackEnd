@@ -32,4 +32,34 @@ const crearUnPedido = async (req, res) => {
   }
 };
 
-module.exports = { traerPedidos, traerUnPedido, crearUnPedido };
+// Actualizar un Pedido
+const actualizarUnPedido = async (req, res) => {
+  try {
+    await pedidosModel.update(req.body, {
+      where: { id: req.params.id },
+    });
+    res.json({ message: "Pedido actualizado correctamente" });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
+// Eliminar un Pedido
+const borrarUnPedido = async (req, res) => {
+  try {
+    await pedidosModel.destroy({
+      where: { id: req.params.id },
+    });
+    res.json({ message: "Pedido eliminado correctamente" });
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
+module.exports = {
+  traerPedidos,
+  traerUnPedido,
+  crearUnPedido,
+  actualizarUnPedido,
+  borrarUnPedido,
+};
