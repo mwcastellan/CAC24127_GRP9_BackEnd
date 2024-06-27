@@ -39,7 +39,7 @@ const actualizarUnPedido = async (req, res) => {
       where: { id: req.params.id },
     });
     res.json({ message: "Pedido actualizado correctamente" });
-    console.log(res.message)
+    console.log(res.message);
   } catch (error) {
     res.json({ message: error.message });
   }
