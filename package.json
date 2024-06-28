@@ -1,6 +1,6 @@
 {
-  "name": "tpo_nodejs_bb_V01R00M01",
-  "version": "1.0.1",
+  "name": "tpo_nodejs_bb_V01R00M00-Grupo9",
+  "version": "1.0.0",
   "description": "Desarrollo Full Stack Node JS - Grupo 9 - Trabajo practico Backend",
   "main": "index.js",
   "scripts": {
