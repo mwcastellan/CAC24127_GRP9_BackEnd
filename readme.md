@@ -1,40 +1,69 @@
-Desarrollo Full Stack Node JS - Grupo 9 - Trabajo practico Backend
--CRUD
-    CREATE
-    READ
-    UPDATE
-    DELETE
+CaC24127_GRP9: DATOS
+--------------------
+Git Repositorios:
+FontEnd TP1: https://github.com/mwcastellan/tpo_nodejs_fron
 
--REQUEST RESPONSE
--CLIENTE  SERVIDOR
+-----------------------------------------------------------------------
+BackEnd TP2:
+    Script Base Datos.......: https://github.com/mwcastellan/tpo_nodejs_bd
+    BackEnd.................: https://github.com/mwcastellan/tpo_nodejs_bb
+    FrontEnd Testing BackEnd: https://github.com/mwcastellan/tpo_nodejs_bf
 
--MVC - MODELO VISTA CONTROLADOR
+Base Datos MySQL:
+    https://www.alwaysdata.com/en/
+    Login: mcastellan@yahoo.com Clave: (Me la piden...)
+    Base de Datos: MYSQL --> Esquema: MCASTELLAN_GRP9 --> Usuario: 363082_grp9 Clave: CaC24127GRP9
+    Desde la web se puede ingresar con: https://phpmyadmin.alwaysdata.com/
+    Tambien se pueden conectar con WorkBench MySQL o desde el backend es: 
+        MySQL host: mysql-mcastellan.alwaysdata.net 
+        Usuario: 363082_grp9 
+        Clave: CaC24127GRP9
 
-Inicializar un proyecto con node
-npm init (crear el package.json) npm init -y
-* NPM (Node Package Manager)
-npm install nombreModulo - dependecia
-npm i = traemos ls dependencias en los modulos de node
-modulos
-https://www.npmjs.com/
+APLICACION:
+BackEnd: https://tpo-nodejs-bb.vercel.app/
+- Agregué :
+// Ingreso a Pedidos
+app.use("/pedidos", pedidosRouter);
+router.get("/", traerPedidos);
+router.get("/:id", traerUnPedido);
+router.post("/", crearUnPedido);
+router.put("/:id", actualizarUnPedido);
+router.delete("/:id", borrarUnPedido);
 
-nodemon index.js
-npm -init
---
-CORS
-CORS: qué es y cómo funciona el cross-origin resource sharing
-Cuando se abre una página web, cargar datos de servidores ajenos está, en teoría, estrictamente prohibido. Sin embargo, puede haber excepciones: si los administradores de ambas webs han acordado trabajar juntos, no hay por qué evitar el intercambio. En estos casos, el llamado cross-origin resource sharing (CORS) regula la colaboración. Te explicamos cómo funciona.
-https://developer.mozilla.org/es/docs/Web/HTTP/CORS
+// Ingreso a Productos
+app.use("/productos", productosRouter);
+router.get("/", traerProductos);
+router.get("/:id", traerUnProducto);
 
-mysql2
-Cliente MySQL para Node.js con enfoque en el rendimiento. Soporta declaraciones preparadas, codificaciones no-utf8, protocolo de registro binario, compresión, ssl mucho más.
-https://www.npmjs.com/package/mysql2
+// Ingreso a Productos Ordenados
+app.use("/reporte_01", reporte_01Router);
+router.get("/", traerReporte_01);
 
-sequelize
-Sequelize es un ORM para Nodejs que te permitirá agilizar bastante tus desarrollos que incluyan bases de datos relacionales como MySQL o Postgress.
-https://ed.team/blog/agiliza-tu-desarrollo-en-nodejs-con-el-orm-sequelize
+// Ingreso a Clientes
+app.use("/clientes", clientesRouter);
+router.get("/", traerClientes);
 
-express.json()
-La función express.json() es una función de middleware integrada en Express. Analiza las requests entrantes con cargas JSON
-https://barcelonageeks.com/funcion-express-js-express-json/
+// Ingreso a Estados Pedidos
+app.use("/estado_pedidos", estado_pedidosRouter);
+router.get("/", traerEstado_Pedidos);
+
+// Ingreso a Subcategoria
+app.use("/subcategoria", subcategoriaRouter);
+router.get("/", traerSubcategoria);
+
+- Está instalado en Vercel y replica automáticamente desde GitHub.
+- https://vercel.com/mwcastellans-projects
+- La aplicación ya hace referencia a la base en allways.com.
+- Siempre está activa.
+
+
+FrontEnd: https://tpo-nodejs-bf.vercel.app/
+- Agregué solo probar la parte front:
+https://tpo-nodejs-bf.vercel.app/pedidos.html
+https://tpo-nodejs-bf.vercel.app/productos.html (solo ver lista)
+
+- Está instalado en Vercel y replica automáticamente desde GitHub.
+- https://vercel.com/mwcastellans-projects
+- Siempre está activa.
+--------------------------------------------------------------------------------------------------
 
