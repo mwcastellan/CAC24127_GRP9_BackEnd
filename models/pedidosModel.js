@@ -10,5 +10,5 @@ const pedidosModel = db.define("pedidos", {
   IMPORTE: { type: DataTypes.DOUBLE },
   IDESTADO: { type: DataTypes.INTEGER },
 });
- 
+
 module.exports = pedidosModel;

@@ -11,5 +11,13 @@ const traerClientes = async (req, res) => {
     res.json({ message: error.message });
   }
 };
-
-module.exports = { traerClientes };
+// Trae un Cliente en particular
+const traerUnCliente = async (req, res) => {
+  try {
+    const cliente = await clientesModel.findByPk(req.params.id);
+    res.json(cliente);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+module.exports = { traerClientes, traerUnCliente };
