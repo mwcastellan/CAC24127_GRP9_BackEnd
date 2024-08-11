@@ -8,7 +8,7 @@ const traerSubcategoria = async (req, res) => {
     });
     res.json(subcategoria);
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: [{ msg: error.message }] });
   }
 };
 

@@ -12,7 +12,7 @@ const traerReporte_01 = async (req, res) => {
     });
     res.json(productos);
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: [{ msg: error.message }] });
   }
 };
 

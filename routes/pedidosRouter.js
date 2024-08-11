@@ -8,11 +8,13 @@ const {
   borrarUnPedido,
 } = require("../controllers/pedidosControllers.js");
 
+const ValidaPedido = require("../controllers/pedidosValidator.js");
+
 // Segun Pedidos es Todos o Individual
 router.get("/", traerPedidos);
 router.get("/:id", traerUnPedido);
-router.post("/", crearUnPedido);
-router.put("/:id", actualizarUnPedido);
+router.post("/", ValidaPedido, crearUnPedido);
+router.put("/:id", ValidaPedido, actualizarUnPedido);
 router.delete("/:id", borrarUnPedido);
 
 module.exports = router;

@@ -8,7 +8,7 @@ const traerClientes = async (req, res) => {
     });
     res.json(clientes);
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: [{ msg: error.message }] });
   }
 };
 // Trae un Cliente en particular
@@ -17,7 +17,18 @@ const traerUnCliente = async (req, res) => {
     const cliente = await clientesModel.findByPk(req.params.id);
     res.json(cliente);
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: [{ msg: error.message }] });
   }
 };
-module.exports = { traerClientes, traerUnCliente };
+
+// Existe un Cliente en particular
+async function existeUnCliente(id) {
+  const token = await clientesModel.findOne({ where: { id } });
+  if (token == null) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+module.exports = { traerClientes, traerUnCliente, existeUnCliente };

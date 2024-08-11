@@ -8,7 +8,7 @@ const traerProductos = async (req, res) => {
     });
     res.json(productos);
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: [{ msg: error.message }] });
   }
 };
 
@@ -18,7 +18,18 @@ const traerUnProducto = async (req, res) => {
     const producto = await productosModel.findByPk(req.params.id);
     res.json(producto);
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: [{ msg: error.message }] });
   }
 };
-module.exports = { traerProductos, traerUnProducto };
+
+// Existe un Producto en particular
+async function existeUnProducto(id) {
+  const token = await productosModel.findOne({ where: { id } });
+  if (token == null) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+module.exports = { traerProductos, traerUnProducto, existeUnProducto };

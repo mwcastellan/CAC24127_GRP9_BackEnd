@@ -8,7 +8,7 @@ const traerEstado_Pedidos = async (req, res) => {
     });
     res.json(estado_pedidos);
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: [{ msg: error.message }] });
   }
 };
 // Trae un Estado_Pedido en particular
@@ -17,8 +17,22 @@ const traerUnEstado_Pedido = async (req, res) => {
     const estado_pedido = await estado_pedidosModel.findByPk(req.params.id);
     res.json(estado_pedido);
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: [{ msg: error.message }] });
   }
 };
 
-module.exports = { traerEstado_Pedidos, traerUnEstado_Pedido };
+// Existe un Estado_Pedido en particular
+async function existeUnEstado_Pedido(id) {
+  const token = await estado_pedidosModel.findOne({ where: { id } });
+  if (token == null) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+module.exports = {
+  traerEstado_Pedidos,
+  traerUnEstado_Pedido,
+  existeUnEstado_Pedido,
+};
