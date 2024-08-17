@@ -101,8 +101,6 @@ const ValidarPedido = [
 
   (req, res, next) => {
     ValidarResultado(req, res, next);
-    console.log(req.body);
-    console.log(res.body);
   },
 ];
 
