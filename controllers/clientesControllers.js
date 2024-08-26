@@ -31,4 +31,33 @@ async function existeUnCliente(id) {
   }
 }
 
-module.exports = { traerClientes, traerUnCliente, existeUnCliente };
+// Crear un Cliente - Post
+const crearUnCliente = async (req, res) => {
+  try {
+    await clientesModel.create(req.body); //({ message:
+    res.body = res.json({ message: [{ msg: "Cliente creado correctamente" }] });
+  } catch (error) {
+    res.body = res.status(400).json({ message: [{ msg: error.message }] });
+  }
+};
+
+// Actualizar un Cliente
+const actualizarUnCliente = async (req, res) => {
+  try {
+    await clientesModel.update(req.body, {
+      where: { id: req.params.id },
+    });
+    res.json({ message: [{ msg: "Cliente actualizado correctamente" }] });
+    console.log(res.message);
+  } catch (error) {
+    res.json({ message: [{ msg: error.message }] });
+  }
+};
+
+module.exports = {
+  traerClientes,
+  traerUnCliente,
+  existeUnCliente,
+  crearUnCliente,
+  actualizarUnCliente,
+};

@@ -1,8 +1,9 @@
-const connection_host = "mysql-mcastellan.alwaysdata.net";
-const connection_user = "363082_grp9";
-const connection_password = "CaC24127GRP9";
-const connection_database = "mcastellan_grp9";
-const connection_dialect = "mysql";
+const config = require("../config");
+const connection_host = config.db.host;
+const connection_user = config.db.user;
+const connection_password = config.db.password;
+const connection_database = config.db.database;
+const connection_dialect = config.db.dialect;
 
 const { Sequelize } = require("sequelize");
 
@@ -16,7 +17,7 @@ const db = new Sequelize(
   }
 );
 
-// mysql2 - Defino solamente, no tiene uso, porque VERCEL no instala el paquete de mysql2 
+// mysql2 - Defino solamente, no tiene uso, porque VERCEL no instala el paquete de mysql2
 // si no se hace referencia a él. Se usa Sequelize.
 // Dá mensaje de error que se instale mysql2 manualmente.
 const wmysql = require("mysql2");
@@ -26,6 +27,6 @@ const wmysql_conn = wmysql.createConnection({
   password: connection_password,
   database: connection_database,
 });
-// 
+//
 
 module.exports = db;

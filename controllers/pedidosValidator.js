@@ -1,5 +1,4 @@
-const { check } = require("express-validator");
-const { validationResult } = require("express-validator");
+const { check, validationResult } = require("express-validator");
 
 const {
   existeUnEstado_Pedido,
