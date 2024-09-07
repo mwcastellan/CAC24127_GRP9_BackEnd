@@ -88,7 +88,6 @@ const LoginUnCliente = async (req, res) => {
     );
     res
       // Genera una Cookie
-      //   httpOnly: true, sameSite: "strict", secure: process.env.NODE_ENV === "production",
       .cookie("tpo_nodejs_bb", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
