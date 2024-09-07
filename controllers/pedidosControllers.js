@@ -1,7 +1,10 @@
+const jwt = require("jsonwebtoken");
+
 const pedidosModel = require("../models/pedidosModel.js");
+const config = require("../config");
 
 // Trae los Pedidos
-const traerPedidos = async (req, res) => {
+const TraerPedidos = async (req, res) => {
   try {
     const pedidos = await pedidosModel.findAll({
       order: [["ID", "ASC"]],
@@ -12,8 +15,21 @@ const traerPedidos = async (req, res) => {
   }
 };
 
+// Trae los Pedidos Clientes
+const TraerPedidosC = async (req, res) => {
+  try {
+    const pedidos = await pedidosModel.findAll({
+      where: { IDCLIENTE: req.body.id },
+      order: [["FECHA_COMPRA", "DESC"]],
+    });
+    res.json(pedidos);
+  } catch (error) {
+    res.json({ message: [{ msg: error.message }] });
+  }
+};
+
 // Trae un Pedido en particular
-const traerUnPedido = async (req, res) => {
+const TraerUnPedido = async (req, res) => {
   try {
     const pedido = await pedidosModel.findByPk(req.params.id);
     res.json(pedido);
@@ -23,7 +39,7 @@ const traerUnPedido = async (req, res) => {
 };
 
 // Crear un Pedido - Post
-const crearUnPedido = async (req, res) => {
+const CrearUnPedido = async (req, res) => {
   try {
     await pedidosModel.create(req.body); //({ message:
     res.body = res.json({ message: [{ msg: "Pedido creado correctamente" }] });
@@ -33,7 +49,7 @@ const crearUnPedido = async (req, res) => {
 };
 
 // Actualizar un Pedido
-const actualizarUnPedido = async (req, res) => {
+const ActualizarUnPedido = async (req, res) => {
   try {
     await pedidosModel.update(req.body, {
       where: { id: req.params.id },
@@ -46,7 +62,7 @@ const actualizarUnPedido = async (req, res) => {
 };
 
 // Eliminar un Pedido
-const borrarUnPedido = async (req, res) => {
+const BorrarUnPedido = async (req, res) => {
   try {
     await pedidosModel.destroy({
       where: { id: req.params.id },
@@ -58,9 +74,10 @@ const borrarUnPedido = async (req, res) => {
 };
 
 module.exports = {
-  traerPedidos,
-  traerUnPedido,
-  crearUnPedido,
-  actualizarUnPedido,
-  borrarUnPedido,
+  TraerPedidos,
+  TraerPedidosC,
+  TraerUnPedido,
+  CrearUnPedido,
+  ActualizarUnPedido,
+  BorrarUnPedido,
 };

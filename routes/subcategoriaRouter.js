@@ -1,10 +1,12 @@
 const express = require("express");
+const app = express();
 const router = express.Router();
+
 const {
-  traerSubcategoria,
+  TraerSubcategoria,
 } = require("../controllers/subcategoriaControllers.js");
 
 // Segun Subcategoria
-router.get("/", traerSubcategoria);
+router.get("/", TraerSubcategoria);
 
 module.exports = router;

@@ -1,8 +1,10 @@
-const config = require("./config");
-const port = config.app.port;
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
+
+const config = require("./config");
+const port = config.app.port;
 const pedidosRouter = require("./routes/pedidosRouter.js");
 const productosRouter = require("./routes/productosRouter.js");
 const reporte_01Router = require("./routes/reporte_01Router.js");
@@ -13,8 +15,14 @@ const pjson = require("./package.json");
 const msg_cabecera = `Sistema: ${pjson.name}`;
 const db = require("./data/db.js");
 
-app.use(cors());
+var corsOptions = {
+  origin: '*', // Reemplazar con dominio
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
+//app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 // Ingreso a la raiz solamente
 app.get("/", (req, res) => {

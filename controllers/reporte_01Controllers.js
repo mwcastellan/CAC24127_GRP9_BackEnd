@@ -1,7 +1,7 @@
 const reporte_01Model = require("../models/reporte_01Model.js");
 
 // Trae los Productos Ordenados -> by idcategoria asc, idsubcategoria asc, id asc
-const traerReporte_01 = async (req, res) => {
+const TraerReporte_01 = async (req, res) => {
   try {
     const productos = await reporte_01Model.findAll({
       order: [
@@ -16,4 +16,4 @@ const traerReporte_01 = async (req, res) => {
   }
 };
 
-module.exports = { traerReporte_01 };
+module.exports = { TraerReporte_01 };

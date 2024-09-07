@@ -1,11 +1,14 @@
 const express = require("express");
+const app = express();
 const router = express.Router();
+
 const {
-  traerEstado_Pedidos, traerUnEstado_Pedido
+  TraerEstado_Pedidos,
+  TraerUnEstado_Pedido,
 } = require("../controllers/estado_pedidosControllers.js");
 
 // Segun Estado_pedidos
-router.get("/", traerEstado_Pedidos);
-router.get("/:id", traerUnEstado_Pedido);
+router.get("/", TraerEstado_Pedidos);
+router.get("/:id", TraerUnEstado_Pedido);
 
 module.exports = router;

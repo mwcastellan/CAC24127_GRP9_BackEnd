@@ -1,6 +1,7 @@
+const { check, validationResult } = require("express-validator");
+
 const config = require("../config");
 const StrongPassword = config.StrongPassword;
-const { check, validationResult } = require("express-validator");
 
 // Valida Resultados
 const ValidarResultado = (req, res, next) => {
@@ -12,7 +13,7 @@ const ValidarResultado = (req, res, next) => {
   }
 };
 
-// Valida un Cliente
+// Validar un Cliente
 const ValidarCliente = [
   // Valida EMAIL
   check("EMAIL").isEmail().withMessage("EMAIL es incorrecto"),
@@ -21,11 +22,12 @@ const ValidarCliente = [
   // Valida NOMBRE
   check("NOMBRE").isAlphanumeric().withMessage("NOMBRE es incorrecto"),
   // Valida DIRECCION
-  check("DIRECCION").isAlphanumeric().withMessage("DIRECCCION es incorrecta"),
+  check("DIRECCION").isAlphanumeric().withMessage("DIRECCION es incorrecta"),
   // Valida PASSWORD
   check("PASSWORD")
     .isStrongPassword(StrongPassword)
     .withMessage("PASSWORD es incorrecto"),
+
   (req, res, next) => {
     ValidarResultado(req, res, next);
   },

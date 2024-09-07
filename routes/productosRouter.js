@@ -1,12 +1,14 @@
 const express = require("express");
+const app = express();
 const router = express.Router();
+
 const {
-  traerProductos,
-  traerUnProducto,
+  TraerProductos,
+  TraerUnProducto,
 } = require("../controllers/productosControllers.js");
 
 // Segun Pedidos es Todos o Individual
-router.get("/", traerProductos);
-router.get("/:id", traerUnProducto);
+router.get("/", TraerProductos);
+router.get("/:id", TraerUnProducto);
 
 module.exports = router;

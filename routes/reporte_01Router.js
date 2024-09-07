@@ -1,8 +1,10 @@
 const express = require("express");
+const app = express();
 const router = express.Router();
-const { traerReporte_01 } = require("../controllers/reporte_01Controllers.js");
+
+const { TraerReporte_01 } = require("../controllers/reporte_01Controllers.js");
 
 // Listar todo
-router.get("/", traerReporte_01);
+router.get("/", TraerReporte_01);
 
 module.exports = router;

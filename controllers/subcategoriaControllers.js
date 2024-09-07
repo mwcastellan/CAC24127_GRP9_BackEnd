@@ -1,7 +1,7 @@
 const subcategoriaModel = require("../models/subcategoriaModel.js");
 
 // Trae las subcategorias
-const traerSubcategoria = async (req, res) => {
+const TraerSubcategoria = async (req, res) => {
   try {
     const subcategoria = await subcategoriaModel.findAll({
       order: [["ID", "ASC"]],
@@ -12,4 +12,4 @@ const traerSubcategoria = async (req, res) => {
   }
 };
 
-module.exports = { traerSubcategoria };
+module.exports = { TraerSubcategoria };

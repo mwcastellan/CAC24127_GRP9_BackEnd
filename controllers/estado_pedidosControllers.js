@@ -1,7 +1,7 @@
 const estado_pedidosModel = require("../models/estado_pedidosModel.js");
 
 // Trae los estados pedidos
-const traerEstado_Pedidos = async (req, res) => {
+const TraerEstado_Pedidos = async (req, res) => {
   try {
     const estado_pedidos = await estado_pedidosModel.findAll({
       order: [["ID", "ASC"]],
@@ -12,7 +12,7 @@ const traerEstado_Pedidos = async (req, res) => {
   }
 };
 // Trae un Estado_Pedido en particular
-const traerUnEstado_Pedido = async (req, res) => {
+const TraerUnEstado_Pedido = async (req, res) => {
   try {
     const estado_pedido = await estado_pedidosModel.findByPk(req.params.id);
     res.json(estado_pedido);
@@ -22,7 +22,7 @@ const traerUnEstado_Pedido = async (req, res) => {
 };
 
 // Existe un Estado_Pedido en particular
-async function existeUnEstado_Pedido(id) {
+async function ExisteUnEstado_Pedido(id) {
   const token = await estado_pedidosModel.findOne({ where: { id } });
   if (token == null) {
     return false;
@@ -32,7 +32,7 @@ async function existeUnEstado_Pedido(id) {
 }
 
 module.exports = {
-  traerEstado_Pedidos,
-  traerUnEstado_Pedido,
-  existeUnEstado_Pedido,
+  TraerEstado_Pedidos,
+  TraerUnEstado_Pedido,
+  ExisteUnEstado_Pedido,
 };

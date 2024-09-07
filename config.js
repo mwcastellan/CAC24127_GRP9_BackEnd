@@ -16,6 +16,13 @@ const config = {
     minNumbers: 1,
     minSymbols: 1,
   },
+  tokensJWT: {
+    secretKey: "elpejerreydelriodelaplata",
+    tokenExpiresIn: "10m",
+  },
+  bcrypt: {
+    salt: 8,
+  },
 };
 
 module.exports = config;
