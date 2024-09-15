@@ -1,5 +1,4 @@
 const express = require("express");
-const app = express();
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
@@ -15,11 +14,17 @@ const {
 const config = require("../config");
 const ValidarPedido = require("../controllers/pedidosValidator.js");
 
+fechahora = new Date();
+
+//---------------------------------------------------------------------------------
 // Autorizar Cliente -- Valida con datos en la cookie tpo-nodejs-bb
 const AutorizarClientes = (req, res, next) => {
   try {
+    console.log("===================================");
+    console.log("Autorizar Cliente: " + fechahora);
+    console.log("===================================");
     console.log("Autorizar Cliente: 1- req.cookies: ");
-    console.log(req.cookies);
+    //console.log(req.cookies);
     const token = req.cookies.tpo_nodejs_bb; // Nombre de la cookie
     try {
       console.log("Autorizar Cliente: 2- Token : " + token);
@@ -32,6 +37,7 @@ const AutorizarClientes = (req, res, next) => {
           " - id : " +
           req.body.id
       );
+      console.log("===================================");
       next();
     } catch (error) {
       console.log("Autorizar Cliente: 4- Error jwt.verify : " + error);
@@ -42,6 +48,7 @@ const AutorizarClientes = (req, res, next) => {
     res.sendStatus(420);
   }
 };
+//---------------------------------------------------------------------------------
 
 // Segun Pedidos es Todos o Individual
 router.get("/clientes", AutorizarClientes, TraerPedidosC);

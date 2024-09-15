@@ -1,5 +1,4 @@
 const express = require("express");
-const app = express();
 const router = express.Router();
 
 const {
@@ -13,10 +12,11 @@ const {
 const ValidarCliente = require("../controllers/clientesValidator.js");
 
 // Segun Clientes
+router.post("/login", LoginUnCliente);
 router.get("/", TraerClientes);
 router.get("/:id", TraerUnCliente);
 router.post("/", ValidarCliente, RegistrarUnCliente);
-router.post("/login", LoginUnCliente);
 router.put("/:id", ValidarCliente, ActualizarUnCliente);
+
 
 module.exports = router;

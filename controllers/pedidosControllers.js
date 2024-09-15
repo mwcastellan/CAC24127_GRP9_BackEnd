@@ -1,7 +1,4 @@
-const jwt = require("jsonwebtoken");
-
 const pedidosModel = require("../models/pedidosModel.js");
-const config = require("../config");
 
 // Trae los Pedidos
 const TraerPedidos = async (req, res) => {

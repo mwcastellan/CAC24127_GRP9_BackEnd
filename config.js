@@ -9,6 +9,9 @@ const config = {
     database: "mcastellan_grp9",
     dialect: "mysql",
   },
+  cors: {
+    origin: ["http://127.0.0.1:5501", "https://tpo-nodejs-bf.vercel.app/"],
+  },
   StrongPassword: {
     minLength: 8,
     minLowercase: 1,

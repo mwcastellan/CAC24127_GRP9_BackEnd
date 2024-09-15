@@ -7,6 +7,8 @@ const {
 } = require("../models/clientesModel.js");
 const config = require("../config");
 
+fechahora = new Date();
+
 // Trae los Clientes
 const TraerClientes = async (req, res) => {
   try {
@@ -52,6 +54,20 @@ const RegistrarUnCliente = async (req, res) => {
   }
 };
 
+// Actualizar un Cliente
+const ActualizarUnCliente = async (req, res) => {
+  // Encriptar PASSWORD
+  req.body.PASSWORD = bcryptjs.hashSync(req.body.PASSWORD, config.bcrypt.salt);
+  try {
+    await clientesModel.update(req.body, {
+      where: { id: req.params.id },
+    });
+    res.json({ message: [{ msg: "Cliente actualizado correctamente" }] });
+  } catch (error) {
+    res.json({ message: [{ msg: error.message }] });
+  }
+};
+
 // Login un Cliente - Post - Retorna Token con ID Cliente en Cookie: tpo-nodejs-bb
 const LoginUnCliente = async (req, res) => {
   try {
@@ -78,6 +94,9 @@ const LoginUnCliente = async (req, res) => {
       config.tokensJWT.secretKey,
       { expiresIn: config.tokensJWT.tokenExpiresIn }
     );
+    console.log("===================================");
+    console.log("Login Cliente: " + fechahora);
+    console.log("===================================");
     console.log(
       "Login Cliente: Autotizado : " +
         cliente.dataValues.EMAIL +
@@ -86,28 +105,20 @@ const LoginUnCliente = async (req, res) => {
         " - token: " +
         token
     );
+    // secure: true,
+    const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hora
+    console.log("===================================");
     res
       // Genera una Cookie
       .cookie("tpo_nodejs_bb", token, {
+        secure: true,
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        expires: expiryDate,
+        partitioned: true,
+        sameSite: "None",
       })
       .status(200)
-      .json({ message: [{ msg: "login correcto" }] });
-  } catch (error) {
-    res.json({ message: [{ msg: error.message }] });
-  }
-};
-
-// Actualizar un Cliente
-const ActualizarUnCliente = async (req, res) => {
-  // Encriptar PASSWORD
-  req.body.PASSWORD = bcryptjs.hashSync(req.body.PASSWORD, config.bcrypt.salt);
-  try {
-    await clientesModel.update(req.body, {
-      where: { id: req.params.id },
-    });
-    res.json({ message: [{ msg: "Cliente actualizado correctamente" }] });
+      .json({ message: [{ msg: "Login correcto" }] });
   } catch (error) {
     res.json({ message: [{ msg: error.message }] });
   }

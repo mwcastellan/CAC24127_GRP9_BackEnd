@@ -15,20 +15,16 @@ const pjson = require("./package.json");
 const msg_cabecera = `Sistema: ${pjson.name}`;
 const db = require("./data/db.js");
 
-var corsOptions = {
-  origin: '*', // Reemplazar con dominio
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-app.use(cors(corsOptions));
-//app.use(cors());
+fechahora = new Date();
+
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({ origin: config.cors.origin, credentials: true }));
 
 // Ingreso a la raiz solamente
 app.get("/", (req, res) => {
   res.send(`${msg_cabecera} - Estás en el Home`);
 });
-// Ingreso a Pedidos
 app.use("/pedidos", pedidosRouter);
 // Ingreso a Productos
 app.use("/productos", productosRouter);
@@ -45,9 +41,9 @@ app.use("/subcategoria", subcategoriaRouter);
 const conexiondb = async () => {
   try {
     await db.authenticate();
-    console.log(`Conexion OK a la Base de Datos`);
+    console.log(`Conexion OK a la Base de Datos - ` + fechahora);
   } catch (error) {
-    console.log(`El Error es : ${error}`);
+    console.log(`El Error es : ${error} - ` + fechahora);
   }
 };
 
