@@ -155,7 +155,7 @@ const RegistrarUnCliente = async (req, res) => {
       .status(200)
       .json({ message: [{ msg: "Cliente registrado correctamente" }] });
   } catch (error) {
-    res.json({ message: [{ msg: error.message }] });
+    res.json({ message: [{ msg: "Cliente no registrado correctamente: " + error.message }] });
   }
 };
 
