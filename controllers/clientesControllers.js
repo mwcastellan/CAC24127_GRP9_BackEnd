@@ -1,3 +1,6 @@
+//-----------------------
+// Clientes Controllers
+//-----------------------
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -40,20 +43,6 @@ async function ExisteUnCliente(id) {
   }
 }
 
-// Registrar un Cliente - Post
-const RegistrarUnCliente = async (req, res) => {
-  // Encriptar PASSWORD
-  req.body.PASSWORD = bcryptjs.hashSync(req.body.PASSWORD, config.bcrypt.salt);
-  try {
-    await clientesModel.create(req.body); //({ message:
-    res.body = res.json({
-      message: [{ msg: "Cliente registrado correctamente" }],
-    });
-  } catch (error) {
-    res.body = res.status(400).json({ message: [{ msg: error.message }] });
-  }
-};
-
 // Actualizar un Cliente
 const ActualizarUnCliente = async (req, res) => {
   // Encriptar PASSWORD
@@ -88,20 +77,22 @@ const LoginUnCliente = async (req, res) => {
       });
 
     // Armar el Token y lo guarda en una cookie - JWT
-    const token = jwt.sign(
-      // ID del Cliente y EMAIL del Cliente
-      { id: cliente.dataValues.id, EMAIL: cliente.dataValues.EMAIL },
-      config.tokensJWT.secretKey,
-      { expiresIn: config.tokensJWT.tokenExpiresIn }
-    );
+    // IDCLIENTE del Cliente y EMAIL del Cliente
+    const payload = {
+      IDCLIENTE: cliente.dataValues.id,
+      EMAIL: cliente.dataValues.EMAIL,
+    };
+    const token = jwt.sign(payload, config.tokensJWT.secretKey, {
+      expiresIn: config.tokensJWT.tokenExpiresIn,
+    });
     console.log("===================================");
     console.log("Login Cliente: " + fechahora);
     console.log("===================================");
     console.log(
       "Login Cliente: Autotizado : " +
-        cliente.dataValues.EMAIL +
-        " - id : " +
-        cliente.dataValues.id +
+        payload.EMAIL +
+        " - IDCLIENTE : " +
+        payload.IDCLIENTE +
         " - token: " +
         token
     );
@@ -124,11 +115,55 @@ const LoginUnCliente = async (req, res) => {
   }
 };
 
+// Registrar un Cliente - Post
+const RegistrarUnCliente = async (req, res) => {
+  // Encriptar PASSWORD
+  req.body.PASSWORD = bcryptjs.hashSync(req.body.PASSWORD, config.bcrypt.salt);
+  try {
+    const cliente = await clientesModel.create(req.body);
+    // Armar el Token y lo guarda en una cookie - JWT
+    // IDCLIENTE del Cliente y EMAIL del Cliente
+    const payload = {
+      IDCLIENTE: cliente.id,
+      EMAIL: cliente.EMAIL,
+    };
+    const token = jwt.sign(payload, config.tokensJWT.secretKey, {
+      expiresIn: config.tokensJWT.tokenExpiresIn,
+    });
+    console.log("===================================");
+    console.log("Registrar Cliente: " + fechahora);
+    console.log("===================================");
+    console.log(
+      "Registrar Cliente: Autotizado : " +
+        payload.EMAIL +
+        " - IDCLIENTE : " +
+        payload.IDCLIENTE +
+        " - token: " +
+        token
+    );
+    const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hora
+    console.log("===================================");
+    res
+      // Genera una Cookie
+      .cookie("tpo_nodejs_bb", token, {
+        secure: true,
+        httpOnly: true,
+        expires: expiryDate,
+        partitioned: true,
+        sameSite: "None",
+      })
+      .status(200)
+      .json({ message: [{ msg: "Cliente registrado correctamente" }] });
+  } catch (error) {
+    res.json({ message: [{ msg: error.message }] });
+  }
+};
+
 module.exports = {
   TraerClientes,
   TraerUnCliente,
   ExisteUnCliente,
-  RegistrarUnCliente,
   LoginUnCliente,
+  RegistrarUnCliente,
   ActualizarUnCliente,
 };

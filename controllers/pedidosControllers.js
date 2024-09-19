@@ -1,22 +1,13 @@
+//-----------------------
+// Pedidos Controllers
+//-----------------------
 const pedidosModel = require("../models/pedidosModel.js");
 
-// Trae los Pedidos
+// Trae los Pedidos Clientes
 const TraerPedidos = async (req, res) => {
   try {
     const pedidos = await pedidosModel.findAll({
-      order: [["ID", "ASC"]],
-    });
-    res.json(pedidos);
-  } catch (error) {
-    res.json({ message: [{ msg: error.message }] });
-  }
-};
-
-// Trae los Pedidos Clientes
-const TraerPedidosC = async (req, res) => {
-  try {
-    const pedidos = await pedidosModel.findAll({
-      where: { IDCLIENTE: req.body.id },
+      where: { IDCLIENTE: req.body.IDCLIENTE },
       order: [["FECHA_COMPRA", "DESC"]],
     });
     res.json(pedidos);
@@ -49,10 +40,9 @@ const CrearUnPedido = async (req, res) => {
 const ActualizarUnPedido = async (req, res) => {
   try {
     await pedidosModel.update(req.body, {
-      where: { id: req.params.id },
+      where: { id: req.params.id, idcliente: req.body.IDCLIENTE },
     });
     res.json({ message: [{ msg: "Pedido actualizado correctamente" }] });
-    console.log(res.message);
   } catch (error) {
     res.json({ message: [{ msg: error.message }] });
   }
@@ -62,7 +52,7 @@ const ActualizarUnPedido = async (req, res) => {
 const BorrarUnPedido = async (req, res) => {
   try {
     await pedidosModel.destroy({
-      where: { id: req.params.id },
+      where: { id: req.params.id, idcliente: req.body.IDCLIENTE },
     });
     res.json({ message: [{ msg: "Pedido eliminado correctamente" }] });
   } catch (error) {
@@ -72,7 +62,6 @@ const BorrarUnPedido = async (req, res) => {
 
 module.exports = {
   TraerPedidos,
-  TraerPedidosC,
   TraerUnPedido,
   CrearUnPedido,
   ActualizarUnPedido,

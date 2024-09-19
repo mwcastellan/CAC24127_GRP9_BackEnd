@@ -1,3 +1,6 @@
+//-----------------------
+// Productos Controllers
+//-----------------------
 const productosModel = require("../models/productosModel.js");
 
 // Trae los Productos

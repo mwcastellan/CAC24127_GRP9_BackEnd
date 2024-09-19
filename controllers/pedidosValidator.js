@@ -1,10 +1,13 @@
+//-----------------------
+// Pedidos Validator
+//-----------------------
 const { check, validationResult } = require("express-validator");
 
 const {
-  existeUnEstado_Pedido,
+  ExisteUnEstado_Pedido,
 } = require("../controllers/estado_pedidosControllers.js");
-const { existeUnCliente } = require("../controllers/clientesControllers.js");
-const { existeUnProducto } = require("../controllers/productosControllers.js");
+const { ExisteUnCliente } = require("../controllers/clientesControllers.js");
+const { ExisteUnProducto } = require("../controllers/productosControllers.js");
 
 // Valida Resultados
 const ValidarResultado = (req, res, next) => {
@@ -39,7 +42,7 @@ const ValidarPedido = [
     .isNumeric()
     .withMessage("IDCLIENTE es incorrecto")
     .custom(async (value) => {
-      const token = await existeUnCliente(value);
+      const token = await ExisteUnCliente(value);
       if (token) {
       } else {
         throw new Error("IDCLIENTE no existe");
@@ -50,7 +53,7 @@ const ValidarPedido = [
     .isNumeric()
     .withMessage("IDPRODUCTO es incorrecto")
     .custom(async (value) => {
-      const token = await existeUnProducto(value);
+      const token = await ExisteUnProducto(value);
       if (token) {
       } else {
         throw new Error("IDPRODUCTO no existe");
@@ -61,7 +64,7 @@ const ValidarPedido = [
     .isNumeric()
     .withMessage("IDESTADO es incorrecto")
     .custom(async (value) => {
-      const token = await existeUnEstado_Pedido(value);
+      const token = await ExisteUnEstado_Pedido(value);
       if (token) {
       } else {
         throw new Error("IDESTADO no existe");
@@ -99,6 +102,10 @@ const ValidarPedido = [
     }),
 
   (req, res, next) => {
+    fechahora = new Date();
+    console.log("===================================");
+    console.log("Validar Pedido: " + fechahora);
+    console.log("===================================");
     ValidarResultado(req, res, next);
   },
 ];

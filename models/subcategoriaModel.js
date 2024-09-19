@@ -1,3 +1,6 @@
+//-----------------------
+// Subcategoria Model
+//-----------------------
 const db = require("../data/db.js");
 const { DataTypes } = require("sequelize");
 

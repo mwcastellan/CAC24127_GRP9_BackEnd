@@ -1,3 +1,6 @@
+//-----------------------
+// Estado_pedidos Controllers
+//-----------------------
 const estado_pedidosModel = require("../models/estado_pedidosModel.js");
 
 // Trae los estados pedidos

@@ -1,3 +1,6 @@
+//-----------------------
+// Clientes Router
+//-----------------------
 const express = require("express");
 const router = express.Router();
 
@@ -15,8 +18,7 @@ const ValidarCliente = require("../controllers/clientesValidator.js");
 router.post("/login", LoginUnCliente);
 router.get("/", TraerClientes);
 router.get("/:id", TraerUnCliente);
-router.post("/", ValidarCliente, RegistrarUnCliente);
+router.post("/registrar", ValidarCliente, RegistrarUnCliente);
 router.put("/:id", ValidarCliente, ActualizarUnCliente);
-
 
 module.exports = router;

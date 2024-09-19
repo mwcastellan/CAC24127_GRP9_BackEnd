@@ -1,3 +1,6 @@
+//-----------------------
+// db
+//-----------------------
 const config = require("../config");
 const connection_host = config.db.host;
 const connection_user = config.db.user;

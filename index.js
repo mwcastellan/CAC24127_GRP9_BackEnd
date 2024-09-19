@@ -1,3 +1,6 @@
+//-----------------------
+// Index
+//-----------------------
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -25,15 +28,21 @@ app.use(cors({ origin: config.cors.origin, credentials: true }));
 app.get("/", (req, res) => {
   res.send(`${msg_cabecera} - Estás en el Home`);
 });
+
+// Ingreso a Pedidos
 app.use("/pedidos", pedidosRouter);
+
 // Ingreso a Productos
 app.use("/productos", productosRouter);
 // Ingreso a Productos Ordenados
 app.use("/reporte_01", reporte_01Router);
+
 // Ingreso a Clientes
 app.use("/clientes", clientesRouter);
+
 // Ingreso a Estados Pedidos
 app.use("/estado_pedidos", estado_pedidosRouter);
+
 // Ingreso a Subcategoria
 app.use("/subcategoria", subcategoriaRouter);
 
@@ -47,6 +56,7 @@ const conexiondb = async () => {
   }
 };
 
+// Listen
 app.listen(port, () => {
   conexiondb();
   console.log(`Server OK en el Puerto ${port}`);

@@ -1,3 +1,6 @@
+//-----------------------
+// Reporte_01 Controllers
+//-----------------------
 const reporte_01Model = require("../models/reporte_01Model.js");
 
 // Trae los Productos Ordenados -> by idcategoria asc, idsubcategoria asc, id asc

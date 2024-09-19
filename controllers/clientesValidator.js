@@ -1,3 +1,6 @@
+//-----------------------
+// Clientes Validator
+//-----------------------
 const { check, validationResult } = require("express-validator");
 
 const config = require("../config");
@@ -22,12 +25,13 @@ const ValidarCliente = [
   // Valida NOMBRE
   check("NOMBRE").isAlphanumeric().withMessage("NOMBRE es incorrecto"),
   // Valida DIRECCION
-  check("DIRECCION").isAlphanumeric().withMessage("DIRECCION es incorrecta"),
+  check("DIRECCION")
+    .matches(/^[a-zA-Z0-9\s,.'-]{3,}$/)
+    .withMessage("DIRECCION es incorrecta"),
   // Valida PASSWORD
   check("PASSWORD")
     .isStrongPassword(StrongPassword)
     .withMessage("PASSWORD es incorrecto"),
-
   (req, res, next) => {
     ValidarResultado(req, res, next);
   },

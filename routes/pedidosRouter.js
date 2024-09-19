@@ -1,10 +1,12 @@
+//-----------------------
+// Pedidos Router
+//-----------------------
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
 const {
   TraerPedidos,
-  TraerPedidosC,
   TraerUnPedido,
   CrearUnPedido,
   ActualizarUnPedido,
@@ -24,18 +26,17 @@ const AutorizarClientes = (req, res, next) => {
     console.log("Autorizar Cliente: " + fechahora);
     console.log("===================================");
     console.log("Autorizar Cliente: 1- req.cookies: ");
-    //console.log(req.cookies);
     const token = req.cookies.tpo_nodejs_bb; // Nombre de la cookie
     try {
       console.log("Autorizar Cliente: 2- Token : " + token);
       const data = jwt.verify(token, config.tokensJWT.secretKey);
-      req.body.id = data.id;
+      req.body.IDCLIENTE = data.IDCLIENTE;
       req.body.EMAIL = data.EMAIL;
       console.log(
         "Autorizar Cliente: 3- Autotizado : " +
           req.body.EMAIL +
-          " - id : " +
-          req.body.id
+          " - IDCLIENTE : " +
+          req.body.IDCLIENTE
       );
       console.log("===================================");
       next();
@@ -51,11 +52,15 @@ const AutorizarClientes = (req, res, next) => {
 //---------------------------------------------------------------------------------
 
 // Segun Pedidos es Todos o Individual
-router.get("/clientes", AutorizarClientes, TraerPedidosC);
-router.get("/", TraerPedidos);
-router.get("/:id", TraerUnPedido);
-router.post("/", ValidarPedido, CrearUnPedido);
-router.put("/:id", ValidarPedido, ActualizarUnPedido);
-router.delete("/:id", BorrarUnPedido);
+router.get("/ver", AutorizarClientes, TraerPedidos);
+router.get("/ver/:id", AutorizarClientes, TraerUnPedido);
+router.post("/crear", AutorizarClientes, ValidarPedido, CrearUnPedido);
+router.put(
+  "/actualizar/:id",
+  AutorizarClientes,
+  ValidarPedido,
+  ActualizarUnPedido
+);
+router.delete("/borrar/:id", AutorizarClientes, BorrarUnPedido);
 
 module.exports = router;

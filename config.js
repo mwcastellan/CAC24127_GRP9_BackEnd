@@ -1,3 +1,6 @@
+//-----------------------
+// Config
+//-----------------------
 const config = {
   app: {
     port: 3030,
@@ -10,7 +13,7 @@ const config = {
     dialect: "mysql",
   },
   cors: {
-    origin: ["http://127.0.0.1:5501", "https://tpo-nodejs-bf.vercel.app/"],
+    origin: ["http://127.0.0.1:5501", "https://tpo-nodejs-bf.vercel.app"],
   },
   StrongPassword: {
     minLength: 8,

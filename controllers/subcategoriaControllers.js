@@ -1,3 +1,6 @@
+//-----------------------
+// Subcategoria Controllers
+//-----------------------
 const subcategoriaModel = require("../models/subcategoriaModel.js");
 
 // Trae las subcategorias
