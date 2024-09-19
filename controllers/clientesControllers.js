@@ -76,12 +76,13 @@ const LoginUnCliente = async (req, res) => {
         message: [{ msg: "contraseña incorrecta/No existe Cliente" }],
       });
 
-    // Armar el Token y lo guarda en una cookie - JWT
+    // Armar payload, generar Token, guarda en cookie
     // IDCLIENTE del Cliente y EMAIL del Cliente
     const payload = {
       IDCLIENTE: cliente.dataValues.id,
       EMAIL: cliente.dataValues.EMAIL,
     };
+
     const token = jwt.sign(payload, config.tokensJWT.secretKey, {
       expiresIn: config.tokensJWT.tokenExpiresIn,
     });
@@ -111,7 +112,7 @@ const LoginUnCliente = async (req, res) => {
       .status(200)
       .json({ message: [{ msg: "Login correcto" }] });
   } catch (error) {
-    res.json({ message: [{ msg: error.message }] });
+    res.json({ message: [{ msg: "Login incorrecto: " + error.message }] });
   }
 };
 
@@ -121,7 +122,7 @@ const RegistrarUnCliente = async (req, res) => {
   req.body.PASSWORD = bcryptjs.hashSync(req.body.PASSWORD, config.bcrypt.salt);
   try {
     const cliente = await clientesModel.create(req.body);
-    // Armar el Token y lo guarda en una cookie - JWT
+    // // Armar payload, generar Token, guarda en cookie
     // IDCLIENTE del Cliente y EMAIL del Cliente
     const payload = {
       IDCLIENTE: cliente.id,
@@ -155,7 +156,11 @@ const RegistrarUnCliente = async (req, res) => {
       .status(200)
       .json({ message: [{ msg: "Cliente registrado correctamente" }] });
   } catch (error) {
-    res.json({ message: [{ msg: "Cliente no registrado correctamente: " + error.message }] });
+    res.json({
+      message: [
+        { msg: "Cliente no registrado correctamente: " + error.message },
+      ],
+    });
   }
 };
 
