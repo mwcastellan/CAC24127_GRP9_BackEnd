@@ -12,6 +12,7 @@ const config = require("../config");
 
 fechahora = new Date();
 
+//-----------------------------------------------------------
 // Trae los Clientes
 const TraerClientes = async (req, res) => {
   try {
@@ -23,6 +24,7 @@ const TraerClientes = async (req, res) => {
     res.json({ message: [{ msg: error.message }] });
   }
 };
+//-----------------------------------------------------------
 // Trae un Cliente en particular
 const TraerUnCliente = async (req, res) => {
   try {
@@ -32,7 +34,7 @@ const TraerUnCliente = async (req, res) => {
     res.json({ message: [{ msg: error.message }] });
   }
 };
-
+//-----------------------------------------------------------
 // Existe un Cliente en particular
 async function ExisteUnCliente(id) {
   const token = await clientesModel.findOne({ where: { id } });
@@ -42,7 +44,7 @@ async function ExisteUnCliente(id) {
     return true;
   }
 }
-
+//-----------------------------------------------------------
 // Actualizar un Cliente
 const ActualizarUnCliente = async (req, res) => {
   // Encriptar PASSWORD
@@ -57,6 +59,18 @@ const ActualizarUnCliente = async (req, res) => {
   }
 };
 
+// Generar Token con payload
+//-----------------------------------------------------------
+const payload = {
+  IDCLIENTE: 0,
+  EMAIL: "",
+};
+function GenerarToken(payload) {
+  return jwt.sign(payload, config.tokensJWT.secretKey, {
+    expiresIn: config.tokensJWT.tokenExpiresIn,
+  });
+}
+//-----------------------------------------------------------
 // Login un Cliente - Post - Retorna Token con ID Cliente en Cookie: tpo-nodejs-bb
 const LoginUnCliente = async (req, res) => {
   try {
@@ -75,17 +89,11 @@ const LoginUnCliente = async (req, res) => {
       return res.status(400).json({
         message: [{ msg: "contraseña incorrecta/No existe Cliente" }],
       });
-
-    // Armar payload, generar Token, guarda en cookie
     // IDCLIENTE del Cliente y EMAIL del Cliente
-    const payload = {
-      IDCLIENTE: cliente.dataValues.id,
-      EMAIL: cliente.dataValues.EMAIL,
-    };
+    payload.IDCLIENTE = cliente.dataValues.id;
+    payload.EMAIL = cliente.dataValues.EMAIL;
+    token = GenerarToken(payload);
 
-    const token = jwt.sign(payload, config.tokensJWT.secretKey, {
-      expiresIn: config.tokensJWT.tokenExpiresIn,
-    });
     console.log("===================================");
     console.log("Login Cliente: " + fechahora);
     console.log("===================================");
@@ -115,22 +123,18 @@ const LoginUnCliente = async (req, res) => {
     res.json({ message: [{ msg: "Login incorrecto: " + error.message }] });
   }
 };
-
+//-----------------------------------------------------------
 // Registrar un Cliente - Post
 const RegistrarUnCliente = async (req, res) => {
   // Encriptar PASSWORD
   req.body.PASSWORD = bcryptjs.hashSync(req.body.PASSWORD, config.bcrypt.salt);
   try {
     const cliente = await clientesModel.create(req.body);
-    // // Armar payload, generar Token, guarda en cookie
     // IDCLIENTE del Cliente y EMAIL del Cliente
-    const payload = {
-      IDCLIENTE: cliente.id,
-      EMAIL: cliente.EMAIL,
-    };
-    const token = jwt.sign(payload, config.tokensJWT.secretKey, {
-      expiresIn: config.tokensJWT.tokenExpiresIn,
-    });
+    payload.IDCLIENTE = cliente.id;
+    payload.EMAIL = cliente.EMAIL;
+    token = GenerarToken(payload);
+
     console.log("===================================");
     console.log("Registrar Cliente: " + fechahora);
     console.log("===================================");
@@ -163,6 +167,7 @@ const RegistrarUnCliente = async (req, res) => {
     });
   }
 };
+//-----------------------------------------------------------
 
 module.exports = {
   TraerClientes,
