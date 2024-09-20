@@ -42,11 +42,13 @@ const AutorizarClientes = (req, res, next) => {
       next();
     } catch (error) {
       console.log("Autorizar Cliente: 4- Error jwt.verify : " + error);
-      res.sendStatus(419);
+      /// res.sendStatus(419);
+      res.body = res.status(419).json({ message: [{ msg: error.message }] });
     }
   } catch (error) {
     console.log("Autorizar Cliente: 5- Error req.cookies : " + error);
-    res.sendStatus(420);
+    // res.sendStatus(420);
+    res.body = res.status(420).json({ message: [{ msg: error.message }] });
   }
 };
 //---------------------------------------------------------------------------------
