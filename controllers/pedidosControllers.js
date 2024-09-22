@@ -29,7 +29,7 @@ const TraerUnPedido = async (req, res) => {
 // Crear un Pedido - Post
 const CrearUnPedido = async (req, res) => {
   try {
-    await pedidosModel.create(req.body); //({ message:
+    await pedidosModel.create(req.body); 
     res.body = res.json({ message: [{ msg: "Pedido creado correctamente" }] });
   } catch (error) {
     res.body = res.status(400).json({ message: [{ msg: error.message }] });

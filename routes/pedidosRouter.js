@@ -21,34 +21,30 @@ fechahora = new Date();
 //---------------------------------------------------------------------------------
 // Autorizar Cliente -- Valida con datos en la cookie tpo-nodejs-bb
 const AutorizarClientes = (req, res, next) => {
+  const Grabarlogs_Procesos = require("./controllers/logs_procesosControllers.js");
   try {
-    console.log("===================================");
-    console.log("Autorizar Cliente: " + fechahora);
-    console.log("===================================");
-    console.log("Autorizar Cliente: 1- req.cookies: ");
+    Grabarlogs_Procesos("Autorizar Cliente: " + fechahora);
+    Grabarlogs_Procesos("Autorizar Cliente: 1- req.cookies: ");
     const token = req.cookies.tpo_nodejs_bb; // Nombre de la cookie
     try {
-      console.log("Autorizar Cliente: 2- Token : " + token);
+      Grabarlogs_Procesos("Autorizar Cliente: 2- Token : " + token);
       const data = jwt.verify(token, config.tokensJWT.secretKey);
       req.body.IDCLIENTE = data.IDCLIENTE;
       req.body.EMAIL = data.EMAIL;
-      console.log(
+      Grabarlogs_Procesos(
         "Autorizar Cliente: 3- Autotizado : " +
           req.body.EMAIL +
           " - IDCLIENTE : " +
           req.body.IDCLIENTE
       );
-      console.log("===================================");
       next();
     } catch (error) {
-      console.log("Autorizar Cliente: 4- Error jwt.verify : " + error);
-      /// res.sendStatus(419);
-      res.body = res.status(429).json({ message: [{ msg: error.message }] });
+      Grabarlogs_Procesos("Autorizar Cliente: 4- Error jwt.verify : " + error);
+      res.body = res.status(419).json({ message: [{ msg: error.message }] });
     }
   } catch (error) {
-    console.log("Autorizar Cliente: 5- Error req.cookies : " + error);
-    // res.sendStatus(420);
-    res.body = res.status(430).json({ message: [{ msg: error.message }] });
+    Grabarlogs_Procesos("Autorizar Cliente: 5- Error req.cookies : " + error);
+    res.body = res.status(420).json({ message: [{ msg: error.message }] });
   }
 };
 //---------------------------------------------------------------------------------
