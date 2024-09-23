@@ -14,6 +14,7 @@ const reporte_01Router = require("./routes/reporte_01Router.js");
 const clientesRouter = require("./routes/clientesRouter.js");
 const estado_pedidosRouter = require("./routes/estado_pedidosRouter.js");
 const subcategoriaRouter = require("./routes/subcategoriaRouter.js");
+const logs_procesosRouter = require("./routes/logs_procesosRouter.js");
 const pjson = require("./package.json");
 const msg_cabecera = `Sistema: ${pjson.name}`;
 const db = require("./data/db.js");
@@ -45,6 +46,9 @@ app.use("/estado_pedidos", estado_pedidosRouter);
 
 // Ingreso a Subcategoria
 app.use("/subcategoria", subcategoriaRouter);
+
+// Ingreso a Logs_Procesos
+app.use("/logs_procesos", logs_procesosRouter);
 
 // Conexion a la Base de Datos
 const conexiondb = async () => {

@@ -102,10 +102,6 @@ const ValidarPedido = [
     }),
 
   (req, res, next) => {
-    fechahora = new Date();
-    console.log("===================================");
-    console.log("Validar Pedido: " + fechahora);
-    console.log("===================================");
     ValidarResultado(req, res, next);
   },
 ];

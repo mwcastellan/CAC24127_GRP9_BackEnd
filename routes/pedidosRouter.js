@@ -21,11 +21,11 @@ fechahora = new Date();
 //---------------------------------------------------------------------------------
 // Autorizar Cliente -- Valida con datos en la cookie tpo-nodejs-bb
 const AutorizarClientes = (req, res, next) => {
-  const Grabarlogs_Procesos = require("./controllers/logs_procesosControllers.js");
+  const Grabarlogs_Procesos = require("../controllers/logs_procesosControllers.js");
   try {
-    Grabarlogs_Procesos("Autorizar Cliente: " + fechahora);
     Grabarlogs_Procesos("Autorizar Cliente: 1- req.cookies: ");
-    const token = req.cookies.tpo_nodejs_bb; // Nombre de la cookie
+    // Nombre de la cookie: tpo_nodejs_bb
+    const token = req.cookies.tpo_nodejs_bb; 
     try {
       Grabarlogs_Procesos("Autorizar Cliente: 2- Token : " + token);
       const data = jwt.verify(token, config.tokensJWT.secretKey);

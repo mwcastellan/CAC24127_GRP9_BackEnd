@@ -10,7 +10,7 @@ const {
 } = require("../models/clientesModel.js");
 const config = require("../config");
 
-fechahora = new Date();
+const Grabarlogs_Procesos = require("../controllers/logs_procesosControllers.js");
 
 //-----------------------------------------------------------
 // Trae los Clientes
@@ -94,10 +94,7 @@ const LoginUnCliente = async (req, res) => {
     payload.EMAIL = cliente.dataValues.EMAIL;
     token = GenerarToken(payload);
 
-    console.log("===================================");
-    console.log("Login Cliente: " + fechahora);
-    console.log("===================================");
-    console.log(
+    Grabarlogs_Procesos(
       "Login Cliente: Autotizado : " +
         payload.EMAIL +
         " - IDCLIENTE : " +
@@ -105,9 +102,8 @@ const LoginUnCliente = async (req, res) => {
         " - token: " +
         token
     );
-    // secure: true,
+
     const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hora
-    console.log("===================================");
     res
       // Genera una Cookie
       .cookie("tpo_nodejs_bb", token, {
@@ -123,6 +119,7 @@ const LoginUnCliente = async (req, res) => {
     res.json({ message: [{ msg: "Login incorrecto: " + error.message }] });
   }
 };
+
 //-----------------------------------------------------------
 // Registrar un Cliente - Post
 const RegistrarUnCliente = async (req, res) => {
@@ -135,10 +132,7 @@ const RegistrarUnCliente = async (req, res) => {
     payload.EMAIL = cliente.EMAIL;
     token = GenerarToken(payload);
 
-    console.log("===================================");
-    console.log("Registrar Cliente: " + fechahora);
-    console.log("===================================");
-    console.log(
+    Grabarlogs_Procesos(
       "Registrar Cliente: Autotizado : " +
         payload.EMAIL +
         " - IDCLIENTE : " +
@@ -146,8 +140,8 @@ const RegistrarUnCliente = async (req, res) => {
         " - token: " +
         token
     );
+
     const expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hora
-    console.log("===================================");
     res
       // Genera una Cookie
       .cookie("tpo_nodejs_bb", token, {
