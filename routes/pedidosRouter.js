@@ -51,7 +51,7 @@ const AutorizarClientes = (req, res, next) => {
 };
 //---------------------------------------------------------------------------------
 
-// Segun Pedidos es Todos o Individual
+// Segun Pedidos
 router.get("/ver", AutorizarClientes, TraerPedidos);
 router.get("/ver/:id", AutorizarClientes, TraerUnPedido);
 router.post("/crear", AutorizarClientes, ValidarPedido, CrearUnPedido);

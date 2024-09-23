@@ -3,9 +3,19 @@
 //-----------------------
 const pedidosModel = require("../models/pedidosModel.js");
 
+const {
+  GrabarLogs_procesos,
+} = require("../controllers/logs_procesosControllers.js");
+
 // Trae los Pedidos Clientes
 const TraerPedidos = async (req, res) => {
   try {
+    GrabarLogs_procesos(
+      "TraerPedidos - EMAIL : " +
+        req.body.EMAIL +
+        " - IDCLIENTE : " +
+        req.body.IDCLIENTE
+    );
     const pedidos = await pedidosModel.findAll({
       where: { IDCLIENTE: req.body.IDCLIENTE },
       order: [["FECHA_COMPRA", "DESC"]],
@@ -19,6 +29,12 @@ const TraerPedidos = async (req, res) => {
 // Trae un Pedido en particular
 const TraerUnPedido = async (req, res) => {
   try {
+    GrabarLogs_procesos(
+      "TraerUnPedido - EMAIL : " +
+        req.body.EMAIL +
+        " - IDCLIENTE : " +
+        req.body.IDCLIENTE
+    );
     const pedido = await pedidosModel.findByPk(req.params.id);
     res.json(pedido);
   } catch (error) {
@@ -29,7 +45,13 @@ const TraerUnPedido = async (req, res) => {
 // Crear un Pedido - Post
 const CrearUnPedido = async (req, res) => {
   try {
-    await pedidosModel.create(req.body); 
+    GrabarLogs_procesos(
+      "CrearUnpedido - EMAIL : " +
+        req.body.EMAIL +
+        " - IDCLIENTE : " +
+        req.body.IDCLIENTE
+    );
+    await pedidosModel.create(req.body);
     res.body = res.json({ message: [{ msg: "Pedido creado correctamente" }] });
   } catch (error) {
     res.body = res.status(400).json({ message: [{ msg: error.message }] });
@@ -39,7 +61,14 @@ const CrearUnPedido = async (req, res) => {
 // Actualizar un Pedido
 const ActualizarUnPedido = async (req, res) => {
   try {
-    await pedidosModel.update(req.body, {
+    await pedi;
+    GrabarLogs_procesos(
+      "ActualizarUnPedido - EMAIL : " +
+        req.body.EMAIL +
+        " - IDCLIENTE : " +
+        req.body.IDCLIENTE
+    );
+    dosModel.update(req.body, {
       where: { id: req.params.id, idcliente: req.body.IDCLIENTE },
     });
     res.json({ message: [{ msg: "Pedido actualizado correctamente" }] });
@@ -51,6 +80,12 @@ const ActualizarUnPedido = async (req, res) => {
 // Eliminar un Pedido
 const BorrarUnPedido = async (req, res) => {
   try {
+    GrabarLogs_procesos(
+      "BorrarUnPedido - EMAIL : " +
+        req.body.EMAIL +
+        " - IDCLIENTE : " +
+        req.body.IDCLIENTE
+    );
     await pedidosModel.destroy({
       where: { id: req.params.id, idcliente: req.body.IDCLIENTE },
     });
