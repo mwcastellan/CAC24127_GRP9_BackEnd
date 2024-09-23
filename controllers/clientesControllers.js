@@ -10,7 +10,9 @@ const {
 } = require("../models/clientesModel.js");
 const config = require("../config");
 
-const Grabarlogs_Procesos = require("../controllers/logs_procesosControllers.js");
+const {
+  GrabarLogs_procesos,
+} = require("../controllers/logs_procesosControllers.js");
 
 //-----------------------------------------------------------
 // Trae los Clientes
@@ -94,7 +96,7 @@ const LoginUnCliente = async (req, res) => {
     payload.EMAIL = cliente.dataValues.EMAIL;
     token = GenerarToken(payload);
 
-    Grabarlogs_Procesos(
+    GrabarLogs_procesos(
       "Login Cliente: Autotizado : " +
         payload.EMAIL +
         " - IDCLIENTE : " +
@@ -132,7 +134,7 @@ const RegistrarUnCliente = async (req, res) => {
     payload.EMAIL = cliente.EMAIL;
     token = GenerarToken(payload);
 
-    Grabarlogs_Procesos(
+    GrabarLogs_procesos(
       "Registrar Cliente: Autotizado : " +
         payload.EMAIL +
         " - IDCLIENTE : " +
