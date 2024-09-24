@@ -64,6 +64,10 @@ router.get("/", TraerSubcategoria);
 // Ingreso a Logs_Procesos
 router.get("/", TraerLogs_procesos);
 
+// Consulta el log de procesos
+https://tpo-nodejs-bb.vercel.app/logs_procesos
+
+-----------------------------------------------------------------------
 
 - Está instalado en Vercel y replica automáticamente desde GitHub.
 - https://vercel.com/mwcastellans-projects
